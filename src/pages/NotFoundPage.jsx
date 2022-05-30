@@ -1,17 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 
-function WelcomePage() {
+const NotFoundPage = () => {
   return (
     <div>
-      Welcome
+      Not Found
       <div>
         <Link to="/main">Go to Main</Link>
       </div>
     </div>
   );
-}
-WelcomePage.propTypes = {};
+};
 
-export default WelcomePage;
+export default NotFoundPage;
