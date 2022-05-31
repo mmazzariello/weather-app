@@ -12,11 +12,11 @@ import { Link as LinkRouter } from "react-router-dom";
 
 const AppFrame = ({ children }) => {
   return (
-    <Grid container justify="center">
+    <Grid container justifyContent={"center"}>
       <AppBar position="static">
         <Toolbar variant="dense">
           <IconButton color="inherit" aria-label="menu">
-            <Link component={LinkRouter} to="/main" color="inherit" aria-label="menu">
+            <Link component={LinkRouter} to="/" color="inherit" aria-label="menu">
               <IconContext.Provider value={{ size: "2em" }}>
                 <WiDaySunny />
               </IconContext.Provider>
