@@ -6,10 +6,10 @@ import CityList from "./../components/CityList";
 import AppFrame from "../components/AppFrame/AppFrame";
 
 const cities = [
-  { city: "Barcelona", country: "Spain" },
-  { city: "Madrid", country: "Spain" },
-  { city: "Buenos Aires", country: "Argentina" },
-  { city: "Bogota", country: "Colombia" },
+  { city: "Barcelona", country: "Spain", countryCode: "ES" },
+  { city: "Madrid", country: "Spain", countryCode: "ES" },
+  { city: "Buenos Aires", country: "Argentina", countryCode: "AR" },
+  { city: "Bogota", country: "Colombia", countryCode: "MX" },
 ];
 
 function MainPage() {

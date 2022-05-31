@@ -5,14 +5,14 @@ import ForecastItem from "./ForecastItem";
 test("ForecastItem render", async () => {
   // Tarea, se deben renderizar los diferentes textos
 
-  const { getByText } = render(<ForecastItem hour={10} state="cloud" temperature={23} weekDay="Monday" />);
+  const { getByText } = render(<ForecastItem hour={10} state={"clear"} temperature={23} weekDay="Monday" />);
   const hour = await screen.findByText(/10/);
-  const state = await screen.findByText("cloud");
+  const state = await screen.findByText("clear");
   const temperature = await screen.findByText(/23/);
   const weekDay = await screen.findByText("Monday");
 
   expect(hour).toHaveTextContent("10");
-  expect(state).toHaveTextContent("cloud");
+  expect(state).toHaveTextContent("clear");
   expect(temperature).toHaveTextContent("23");
   expect(weekDay).toHaveTextContent("Monday");
 });

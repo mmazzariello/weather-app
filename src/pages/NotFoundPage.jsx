@@ -8,7 +8,7 @@ import { Link } from "@mui/material";
 
 const NotFoundPage = () => {
   return (
-    <Grid container direction="column" justify="center" className="full center">
+    <Grid container direction="column" justify="center" className="full center-not-found">
       <div className="highlight">
         <Grid item container xs={12} justifyContent={"center"} alignItems={"center"}>
           <Grid item>
