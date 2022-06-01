@@ -9,7 +9,7 @@ const cities = [
   { city: "Barcelona", country: "Spain", countryCode: "ES" },
   { city: "Madrid", country: "Spain", countryCode: "ES" },
   { city: "Buenos Aires", country: "Argentina", countryCode: "AR" },
-  { city: "Bogota", country: "Colombia", countryCode: "MX" },
+  { city: "Lisboa", country: "Portugal", countryCode: "PT" },
 ];
 
 function MainPage() {

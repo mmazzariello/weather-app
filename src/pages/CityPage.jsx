@@ -1,11 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
-import CityInfo from "./../components/CityInfo";
-import Weather from "./../components/Weather";
-import WeatherDetails from "./../components/WeatherDetails";
-import ForecastChart from "./../components/ForecastChart";
-import Forecast from "./../components/Forecast";
+import CityInfo from "../components/CityInfo";
+import Weather from "../components/Weather";
+import WeatherDetails from "../components/WeatherDetails";
+import ForecastChart from "../components/ForecastChart";
+import Forecast from "../components/Forecast";
 import AppFrame from "../components/AppFrame";
 
 const dataExample = [
@@ -42,17 +42,17 @@ const dataExample = [
 ];
 
 const forecastItemListExample = [
-  { hour: 14, state: "sunny", temperature: 17, weekDay: "Monday" },
+  { hour: 19, state: "clear", temperature: 17, weekDay: "Monday" },
   { hour: 12, state: "rain", temperature: 20, weekDay: "Tuesday" },
-  { hour: 14, state: "sunny", temperature: 19, weekDay: "Monday" },
-  { hour: 12, state: "cloud", temperature: 23, weekDay: "Thursday" },
-  { hour: 18, state: "fog", temperature: 21, weekDay: "Monday" },
+  { hour: 14, state: "clear", temperature: 19, weekDay: "Monday" },
+  { hour: 12, state: "clouds", temperature: 23, weekDay: "Thursday" },
+  { hour: 18, state: "clouds", temperature: 21, weekDay: "Monday" },
 ];
 
 function CityPage() {
   const city = "Barcelona";
   const country = "Spain";
-  const state = "cloudy";
+  const state = "clouds";
   const temperature = 32;
   const humidity = 80;
   const wind = 5;

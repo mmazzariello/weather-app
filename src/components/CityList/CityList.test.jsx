@@ -3,14 +3,14 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import CityList from "./CityList";
 
 const cities = [
-  { city: "Barcelona", country: "Spain" },
-  { city: "Madrid", country: "Spain" },
-  { city: "Buenos Aires", country: "Argentina" },
-  { city: "Bogota", country: "Colombia" },
+  { city: "Barcelona", country: "Spain", countryCode: "ES" },
+  { city: "Madrid", country: "Spain", countryCode: "ES" },
+  { city: "Buenos Aires", country: "Argentina", countryCode: "AR" },
+  { city: "Bogota", country: "Colombia", countryCode: "MX" },
 ];
 
 test("render CityList", async () => {
-  const { findAllByRole } = render(<CityList cities={cities} />);
+  const { findAllByRole } = render(<CityList cities={cities} onClickCity={() => {}} />);
   const items = await screen.findAllByRole("listitem");
 
   expect(items).toHaveLength(4);
