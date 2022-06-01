@@ -11,14 +11,11 @@ import convertUnits from "convert-units";
 
 const getCityCode = (city, countryCode) => `${city}-${countryCode}`;
 
-// li: es un item (según tag html, tiene el role "listitem")
-// renderCityAndCountry se va a convertir en una función que retorna otra función
 const renderCityAndCountry = (eventOnClickCity) => (cityAndCountry, weather) => {
   const { city, countryCode, country } = cityAndCountry;
-  // const { temperature, state } = weather
 
   return (
-    <ListItem button key={getCityCode(city, countryCode)} onClick={eventOnClickCity}>
+    <ListItem button key={getCityCode(city, countryCode)} onClick={() => eventOnClickCity(city, countryCode)}>
       <Grid container justify="center" alignItems="center">
         <Grid item md={9} xs={12}>
           <CityInfo city={city} country={country} />
@@ -31,8 +28,6 @@ const renderCityAndCountry = (eventOnClickCity) => (cityAndCountry, weather) => 
   );
 };
 
-// cities: es un array, y en cada item tiene que tener la ciudad, pero además el country
-// ul: tag html para listas no ordenadas
 const CityList = ({ cities, onClickCity }) => {
   const [allWeather, setAllWeather] = useState({});
   const [error, setError] = useState(null);
@@ -50,18 +45,15 @@ const CityList = ({ cities, onClickCity }) => {
         const state = data.weather[0].main.toLowerCase();
 
         const propName = getCityCode(city, countryCode);
-        const propValue = { temperature, state }; // Ej: { temperature: 10, state: "sunny" }
+        const propValue = { temperature, state };
 
         setAllWeather((allWeather) => ({ ...allWeather, [propName]: propValue }));
       } catch (error) {
         if (error.response) {
-          // Errores que nos responde el server
           setError("Ha ocurrido un error en el servidor del clima");
         } else if (error.request) {
-          // Errores que suceden por no llegar al server
           setError("Verifique la conexión a internet");
         } else {
-          // Errores imprevistos
           setError("Error al cargar los datos");
         }
       }

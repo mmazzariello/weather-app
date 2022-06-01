@@ -1,41 +1,45 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+// import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid";
+import { useParams } from "react-router-dom";
 import CityInfo from "../components/CityInfo";
 import Weather from "../components/Weather";
 import WeatherDetails from "../components/WeatherDetails";
 import ForecastChart from "../components/ForecastChart";
 import Forecast from "../components/Forecast";
 import AppFrame from "../components/AppFrame";
+import axios from "axios";
+import moment from "moment";
+import convertUnits from "convert-units";
 
 const dataExample = [
   {
-    dayHour: "Jue 18",
+    dayWeek: "Jue 18",
     min: 14,
     max: 22,
   },
   {
-    dayHour: "Vie 06",
+    dayWeek: "Vie 06",
     min: 18,
     max: 27,
   },
   {
-    dayHour: "Vie 12",
+    dayWeek: "Vie 12",
     min: 18,
     max: 28,
   },
   {
-    dayHour: "Vie 18",
+    dayWeek: "Vie 18",
     min: 18,
     max: 25,
   },
   {
-    dayHour: "Sab 06",
+    dayWeek: "Sab 06",
     min: 15,
     max: 22,
   },
   {
-    dayHour: "Sab 12",
+    dayWeek: "Sab 12",
     min: 12,
     max: 19,
   },
@@ -50,14 +54,57 @@ const forecastItemListExample = [
 ];
 
 function CityPage() {
-  const city = "Barcelona";
+  const [data, setData] = useState(null);
+  const [forecastItemList, setForecastItemList] = useState(null);
+  const { city, countryCode } = useParams();
+
+  useEffect(() => {
+    const getForecast = async () => {
+      const API_key = "a391788330b0112a0fbfe4ba249171a9";
+      const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city},${countryCode}&appid=${API_key}`;
+
+      try {
+        const { data } = await axios.get(url);
+        console.log("forecastData", data);
+
+        const daysAhead = [0, 1, 2, 3, 4, 5];
+        const days = daysAhead.map((d) => moment().add(d, "d"));
+        const dataAux = days.map((day) => {
+          const tempObjArray = data.list.filter((item) => {
+            const dayOfYear = moment.unix(item.dt).dayOfYear();
+            return dayOfYear === day.dayOfYear();
+          });
+
+          console.log("day.dayOfYear()", day.dayOfYear());
+          console.log("tempObjArray", tempObjArray);
+
+          const temps = tempObjArray.map((item) => item.main.temp);
+
+          const toCelsius = (temp) => Number(convertUnits(temp).from("K").to("C").toFixed(0));
+          return {
+            dayWeek: day.format("ddd"),
+            min: toCelsius(Math.min(...temps)),
+            max: toCelsius(Math.max(...temps)),
+          };
+        });
+
+        setData(dataAux);
+        setForecastItemList(forecastItemListExample);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getForecast();
+  }, [city, countryCode]);
+
+  // const city = "Barcelona";
   const country = "Spain";
   const state = "clouds";
   const temperature = 32;
   const humidity = 80;
   const wind = 5;
-  const data = dataExample;
-  const forecastItemList = forecastItemListExample;
+  // const data = dataExample;
+  // const forecastItemList = forecastItemListExample;
 
   return (
     <AppFrame>
@@ -73,12 +120,8 @@ function CityPage() {
             <WeatherDetails humidity={humidity} wind={wind} />
           </Grid>
         </Grid>
-        <Grid item>
-          <ForecastChart data={data} />
-        </Grid>
-        <Grid item>
-          <Forecast forecastItemList={forecastItemList} />
-        </Grid>
+        <Grid item>{data && <ForecastChart data={data} />} </Grid>
+        <Grid item>{forecastItemList && <Forecast forecastItemList={forecastItemList} />} </Grid>
       </Grid>
     </AppFrame>
   );

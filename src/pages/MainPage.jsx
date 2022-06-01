@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Paper from "@mui/material/Paper";
 import { useHistory } from "react-router-dom";
 import CityList from "./../components/CityList";
@@ -14,8 +13,8 @@ const cities = [
 
 function MainPage() {
   const history = useHistory();
-  const onClickHandler = () => {
-    history.push("/city");
+  const onClickHandler = (city, countryCode) => {
+    history.push(`/city/${countryCode}/${city}`);
   };
 
   return (
