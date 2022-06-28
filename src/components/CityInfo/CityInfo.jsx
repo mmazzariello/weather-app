@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Typography } from "@mui/material";
 
 const CityInfo = ({ city, country }) => {
+  console.log(country);
   return (
     <div>
       <Typography display="inline" variant="h4">
